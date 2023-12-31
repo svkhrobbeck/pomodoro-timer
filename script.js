@@ -17,6 +17,7 @@ const getZero = (num) => {
 
 const setTexts = (minutes, seconds) => {
   const time = `${getZero(minutes)}:${getZero(seconds)}`;
+  elTime.dateTime = time;
   elTime.textContent = time;
 };
 
