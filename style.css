@@ -51,10 +51,31 @@ body {
   overflow: hidden;
 }
 
+/* CONTAINER */
+.container {
+  max-width: 1280px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
 .main {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+
+/* header */
+.header {
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.logo {
+  margin: 0;
+  font-size: 32px;
 }
 
 /* timer */
@@ -68,9 +89,10 @@ body {
 }
 
 .timer__time {
+  margin-top: 0;
+  margin-bottom: 40px;
   font-size: 320px;
   line-height: 1;
-  margin-bottom: 50px;
   user-select: none;
   cursor: grab;
 }
@@ -97,4 +119,42 @@ body {
   width: 36px;
   aspect-ratio: 1 / 1;
   height: auto;
+}
+
+/* tablet-l */
+@media only screen and (max-width: 1024px) {
+  .timer__time {
+    font-size: 250px;
+    margin-bottom: 35px;
+  }
+}
+
+/* tablet */
+@media only screen and (max-width: 768px) {
+  .timer__time {
+    font-size: 210px;
+    margin-bottom: 30px;
+  }
+}
+
+/* mobile */
+@media only screen and (max-width: 576px) {
+  .timer__time {
+    font-size: 160px;
+    margin-bottom: 25px;
+  }
+
+  .header__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* mobile-s */
+@media only screen and (max-width: 475px) {
+  .timer__time {
+    font-size: 120px;
+    margin-bottom: 20px;
+  }
 }
