@@ -11,8 +11,42 @@ let isPaused = true;
 let copiedTime = countMinutes;
 
 // helper functions
+const playPlayer = () => {
+  if (!isPaused) return;
+
+  elPlayBtn.classList.add("visually-hidden");
+  elPauseBtn.classList.remove("visually-hidden");
+  isPaused = false;
+  startCountdown(countMinutes);
+};
+
+const pausePlayer = () => {
+  if (isPaused) return;
+
+  clearInterval(intervalId);
+  isPaused = true;
+  elPlayBtn.classList.remove("visually-hidden");
+  elPauseBtn.classList.add("visually-hidden");
+};
+
+const resetPlayer = () => {
+  if (isPaused) return;
+
+  setTexts(25, 0);
+  copiedTime = countMinutes;
+  isPaused = true;
+  clearInterval(intervalId);
+  elPlayBtn.classList.remove("visually-hidden");
+  elPauseBtn.classList.add("visually-hidden");
+};
+
 const getZero = (num) => {
   return num < 10 ? `0${num}` : num;
+};
+
+const playAudio = (audioSrc) => {
+  const audio = new Audio(audioSrc);
+  audio.play();
 };
 
 const setTexts = (minutes, seconds) => {
@@ -21,17 +55,24 @@ const setTexts = (minutes, seconds) => {
   elTime.textContent = time;
 };
 
+const timerEnd = () => {
+  if (copiedTime < 1) {
+    resetPlayer();
+    playAudio("./assets/alarm.mp3");
+  }
+};
+
 const startCountdown = () => {
   let minutes = 25;
   let seconds = 60;
 
-  if (isPaused) return;
-
   intervalId = setInterval(() => {
     copiedTime--;
+
     minutes = Math.floor(copiedTime / 60);
     seconds = copiedTime % 60;
 
+    timerEnd();
     setTexts(minutes, seconds);
   }, 1000);
 };
@@ -42,33 +83,9 @@ elControls.addEventListener("click", (e) => {
   if (!el) return;
 
   const role = el.dataset.role;
+  playAudio("./assets/click.wav");
 
-  if (role === "play") {
-    if (!isPaused) return;
-
-    elPlayBtn.classList.add("visually-hidden");
-    elPauseBtn.classList.remove("visually-hidden");
-    isPaused = false;
-    startCountdown(countMinutes);
-  }
-
-  if (role === "pause") {
-    if (isPaused) return;
-
-    clearInterval(intervalId);
-    isPaused = true;
-    elPlayBtn.classList.remove("visually-hidden");
-    elPauseBtn.classList.add("visually-hidden");
-  }
-
-  if (role === "reset") {
-    if (isPaused) return;
-
-    copiedTime = countMinutes;
-    isPaused = true;
-    clearInterval(intervalId);
-    setTexts(25, 0);
-    elPlayBtn.classList.remove("visually-hidden");
-    elPauseBtn.classList.add("visually-hidden");
-  }
+  if (role === "play") playPlayer();
+  if (role === "pause") pausePlayer();
+  if (role === "reset") resetPlayer();
 });
