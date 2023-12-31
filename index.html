@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Timer</title>
+
+    <!-- styles -->
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- favicon -->
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
+  </head>
+  <body>
+    <main class="main">
+      <div class="timer">
+        <time class="timer__time time js-time" datetime="25:00">25:00</time>
+        <div class="timer__controls js-controls">
+          <button class="timer__btn timer__btn--play" data-role="play">
+            <img class="timer__btn-img" src="img/play.svg" alt="icon play" />
+          </button>
+
+          <button
+            class="timer__btn timer__btn--pause visually-hidden"
+            data-role="pause"
+          >
+            <img class="timer__btn-img" src="img/pause.svg" alt="icon pause" />
+          </button>
+
+          <button class="timer__btn timer__btn--reset" data-role="reset">
+            <img class="timer__btn-img" src="img/reset.svg" alt="icon reset" />
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
